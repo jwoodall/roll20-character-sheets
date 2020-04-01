@@ -1,8 +1,8 @@
 {
-    "html": "MutantYearZeroAlternative.html",
-    "css": "MutantYearZeroAlternative.css",
-    "authors": "Ludvig, John C., Cassie Levett",
-    "roll20userid": "2709, 3107550, 557736",
-    "preview": "MutantYearZeroPreview.png",
-    "instructions": "A sheet for Mutant: Year Zero. This particular sheet features an updated look and a far more intuitive attribute naming convention."
+    "html": "MutantYearZeroWithRoller.html",
+    "css": "MutantYearZeroWithRoller.css",
+    "authors": "Ludvig, John C., Cassie Levett, Jason Woodall",
+    "roll20userid": "2709, 3107550, 557736, 5682814",
+    "preview": "MutantYearZeroWithRollerPreview.png",
+    "instructions": "A sheet for Mutant: Year Zero. Modified from MutantYearZeroAlternative by Ludvig, John C., Cassie Levett.  9Added functionality with MutantYearZero Dice roller: https://app.roll20.net/forum/post/2968252/script-mutantyearzero-updated-to-v0-dot-1-7/ "
 }

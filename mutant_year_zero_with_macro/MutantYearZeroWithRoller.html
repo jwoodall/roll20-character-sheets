@@ -339,7 +339,7 @@
                                     <input class="sheet-value-brighter sheet-value-singledigit" name="attr_skill-value-repeating" type="number">
                                 </td>
                                 <td align="center">
-                                    <button type='roll' value='&{template:default} {{name= @{skill-name-repeating}}} {{Base Dice = [[?{Base Dice|0}d6>6]]}} {{Skill Dice = [[?{Skill Dice|0}d6>6]]}} {{Gear Dice = [[?{Gear Dice|0}d6>6]]}}'
+                                    <button type='roll' value='!myz [[?{Skill Dice|0}d6]] [[?{Base Dice|0}d6]] [[?{Gear Dice|0}d6]] --Player|@{attr_character_name} --Skill|@{skill-name-repeating})'
                                     name='roll_custom_rep'></button>
                                 </td>
                             </tr>
@@ -351,7 +351,7 @@
                             <td class="sheet-text-header" colspan="4" style="background-image: url('http://i.imgur.com/NHDGp0U.jpg')">
                                 ADVANCED ROLL
                                 <button type="roll"  name='roll_fight' class="sheet-right-roll"
-                                        value='&{template:default} {{name=Custom Roll}}  {{ Base Dice= [[[[@{advroll_base_success}+0]]d1cs1cf2>0+ [[@{advroll_base_fail}+0]]d1cs2cf1>6+ [[@{advroll_base_start}-@{advroll_base_success}-@{advroll_base_fail}+0]]d6>6]]}}  {{ Skill Dice= [[[[@{advroll_skill_success}+0]]d1cs1cf2>0+ [[@{advroll_skill_fail}+0]]d1cs2cf1>6+ [[@{advroll_skill_start}-@{advroll_skill_success}-@{advroll_skill_fail}+0]]d6>6]]}} {{ Gear Dice= [[[[@{advroll_gear_success}+0]]d1cs1cf2>0+ [[@{advroll_gear_fail}+0]]d1cs2cf1>6+ [[@{advroll_gear_start}-@{advroll_gear_success}-@{advroll_gear_fail}+0]]d6>6]]}}'
+								value='&{template:default} {{name=Custom Roll}}  {{ Base Dice= [[[[@{advroll_base_success}+0]]d1cs1cf2>0+ [[@{advroll_base_fail}+0]]d1cs2cf1>6+ [[@{advroll_base_start}-@{advroll_base_success}-@{advroll_base_fail}+0]]d6>6]]}}  {{ Skill Dice= [[[[@{advroll_skill_success}+0]]d1cs1cf2>0+ [[@{advroll_skill_fail}+0]]d1cs2cf1>6+ [[@{advroll_skill_start}-@{advroll_skill_success}-@{advroll_skill_fail}+0]]d6>6]]}} {{ Gear Dice= [[[[@{advroll_gear_success}+0]]d1cs1cf2>0+ [[@{advroll_gear_fail}+0]]d1cs2cf1>6+ [[@{advroll_gear_start}-@{advroll_gear_success}-@{advroll_gear_fail}+0]]d6>6]]}}'
                                  style="float:right;"></button>
                             </td>
                         </tr>
@@ -540,7 +540,7 @@
                         </tr>
                         <tr class="sheet-row-light">
                             <td class="sheet-text-label">
-                                Bullets:
+                                <span name="attr_bullet_name">Bullets:</span>
                             </td>
                             <td align="center" width="49">
                                 <input class="sheet-value-brighter sheet-value-doubledigit" name="attr_bullets" type="number">
@@ -1216,7 +1216,9 @@
                                 know_the_zone_name: "Know the Zone (Wits)",
                                 sense_emotion_name:"Sense Emotion (Empathy)",
                                 manipulate_name:"Manipulate (Empathy)",
-                                heal_name:"Heal (Empathy)" },
+                                heal_name:"Heal (Empathy)",
+								attr_bullet_name:"Bullets:"
+								},
                                 
                     "Animal":{strength_name:"Strength",
                                 agility_name: "Agility",
@@ -1247,7 +1249,9 @@
                                 know_the_zone_name: "Know Nature (Wits)",
                                 sense_emotion_name:"Sense Emotion (Instinct)",
                                 manipulate_name:"Dominate (Instinct)",
-                                heal_name:"Heal (Instinct)" },
+                                heal_name:"Heal (Instinct)",
+								attr_bullet_name:"Bullets:"
+								},
                      
                     "Robot":{strength_name:"Servos",
                                 agility_name: "Stability",
@@ -1278,8 +1282,9 @@
                                 know_the_zone_name: "Analyze (Processor)",
                                 sense_emotion_name:"Question (Network)",
                                 manipulate_name:"Interact (Network)",
-                                heal_name:"Repair (Network)" },
-                      
+                                heal_name:"Repair (Network)",
+								attr_bullet_name:"Energy:"
+								},                     
                     "Human":{strength_name:"Strength",
                                 agility_name: "Agility",
                                 wits_name: "Wits",
@@ -1309,14 +1314,13 @@
                                 know_the_zone_name: "Know the Zone (Wits)",
                                 sense_emotion_name:"Sense Emotion (Empathy)",
                                 manipulate_name:"Manipulate (Empathy)",
-                                heal_name:"Heal (Empathy)" },
+                                heal_name:"Heal (Empathy)",
+								attr_bullet_name:"Credits:"
+								},
                 };   
                 
                 getAttrs(["RaceType"], function(values) {
-                    
-                                        
-                                        
-                            var race_att_names;
+					var race_att_names;
                     if (_.has(character_types, values.RaceType) ) {
                         race_att_names = character_types[values.RaceType];
                         
@@ -1324,38 +1328,37 @@
                         else {
                         race_att_names = character_types["Mutant"];
                         }
-                                setAttrs({strength_name: race_att_names.strength_name});
-                                setAttrs({agility_name: race_att_names.agility_name});
-                                setAttrs({wits_name: race_att_names.wits_name});
-                                setAttrs({empathy_name: race_att_names.empathy_name});
-                                
-                                
-                                setAttrs({damage_name: race_att_names.damage_name});
-                        setAttrs({fatigue_name: race_att_names.fatigue_name});
-                        setAttrs({confusion_name: race_att_names.confusion_name});
-                        setAttrs({doubt_name: race_att_names.doubt_name});
-                        setAttrs({appearance_name: race_att_names.appearance_name});
-                        setAttrs({face_name: race_att_names.face_name});
-                        setAttrs({body_name: race_att_names.body_name});
-                        setAttrs({clothing_name: race_att_names.clothing_name});
-                        setAttrs({skill_name: race_att_names.skill_name});
-                        setAttrs({mutation_name: race_att_names.mutation_name});
-                        setAttrs({talent_name: race_att_names.talent_name});
-                        setAttrs({mutation_points_name: race_att_names.mutation_points_name});
-                        setAttrs({role_name: race_att_names.role_name});
-                        setAttrs({rank_name: race_att_names.rank_name});
-                        setAttrs({endure_name: race_att_names.endure_name});
-                        setAttrs({force_name: race_att_names.force_name});
-                        setAttrs({fight_name: race_att_names.fight_name});
-                        setAttrs({sneak_name: race_att_names.sneak_name});
-                        setAttrs({move_name: race_att_names.move_name});
-                        setAttrs({shoot_name: race_att_names.shoot_name});
-                        setAttrs({scout_name: race_att_names.scout_name});
-                        setAttrs({comprehend_name: race_att_names.comprehend_name});
-                        setAttrs({know_the_zone_name: race_att_names.know_the_zone_name});
-                        setAttrs({sense_emotion_name: race_att_names.sense_emotion_name});
-                        setAttrs({manipulate_name: race_att_names.manipulate_name});
-                        setAttrs({heal_name: race_att_names.heal_name});
+					setAttrs({strength_name: race_att_names.strength_name});
+					setAttrs({agility_name: race_att_names.agility_name});
+					setAttrs({wits_name: race_att_names.wits_name});
+					setAttrs({empathy_name: race_att_names.empathy_name});
+					setAttrs({damage_name: race_att_names.damage_name});
+					setAttrs({fatigue_name: race_att_names.fatigue_name});
+					setAttrs({confusion_name: race_att_names.confusion_name});
+					setAttrs({doubt_name: race_att_names.doubt_name});
+					setAttrs({appearance_name: race_att_names.appearance_name});
+					setAttrs({face_name: race_att_names.face_name});
+					setAttrs({body_name: race_att_names.body_name});
+					setAttrs({clothing_name: race_att_names.clothing_name});
+					setAttrs({skill_name: race_att_names.skill_name});
+					setAttrs({mutation_name: race_att_names.mutation_name});
+					setAttrs({talent_name: race_att_names.talent_name});
+					setAttrs({mutation_points_name: race_att_names.mutation_points_name});
+					setAttrs({role_name: race_att_names.role_name});
+					setAttrs({rank_name: race_att_names.rank_name});
+					setAttrs({endure_name: race_att_names.endure_name});
+					setAttrs({force_name: race_att_names.force_name});
+					setAttrs({fight_name: race_att_names.fight_name});
+					setAttrs({sneak_name: race_att_names.sneak_name});
+					setAttrs({move_name: race_att_names.move_name});
+					setAttrs({shoot_name: race_att_names.shoot_name});
+					setAttrs({scout_name: race_att_names.scout_name});
+					setAttrs({comprehend_name: race_att_names.comprehend_name});
+					setAttrs({know_the_zone_name: race_att_names.know_the_zone_name});
+					setAttrs({sense_emotion_name: race_att_names.sense_emotion_name});
+					setAttrs({manipulate_name: race_att_names.manipulate_name});
+					setAttrs({heal_name: race_att_names.heal_name});
+					setAttrs({attr_bullet_name: race_att_names.attr_bullet_name});
                 });
             });
             //object reference matching core attribute with the associated trauma type
